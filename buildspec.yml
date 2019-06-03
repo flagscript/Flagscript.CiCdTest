@@ -2,6 +2,8 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      dotnet: 2.2
     commands:
       # Setup dotnet cli aws extensions
       - dotnet tool install -g Amazon.Lambda.Tools
