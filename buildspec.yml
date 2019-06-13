@@ -16,4 +16,4 @@ phases:
 
 artifacts:
   files: 
-    - ./src/Flagscript.CiCdTest/bin/Release/*
+    - ./src/Flagscript.CiCdTest/bin/Release/netcoreapp2.1/*
