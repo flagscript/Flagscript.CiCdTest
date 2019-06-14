@@ -10,9 +10,19 @@ phases:
     finally:
       # List Environment Variables
       - printenv
+      # Print CodeBuild Vars
+      - echo $PIPELINE_BUCKET
+      - echo $APPLICATION_NAME
   build:
     commands:
-      - dotnet build ./src/Flagscript.CiCdTest/Flagscript.CiCdTest.csproj -c Release -f netcoreapp2.1
+      - >
+        dotnet dotnet lambda package-ci 
+        -pl ./src/Flagscript.CiCdTest/Flagscript.CiCdTest.csproj 
+        -c Release 
+        -f netcoreapp2.1
+        -t app-cloudformation.yml
+        -ot ./output-templates/app-cloudformation.yml
+        -sb doms-aws-poc-repository
 
 artifacts:
   files: 
