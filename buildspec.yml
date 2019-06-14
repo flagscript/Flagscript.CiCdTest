@@ -17,6 +17,9 @@ phases:
       - echo $APPLICATION_NAME
   build:
     commands:
+      # Make Templates Dir
+      - mkdir output-templates
+      # Package CI
       - >
         dotnet lambda package-ci 
         -pl ./src/Flagscript.CiCdTest/
@@ -25,7 +28,7 @@ phases:
         -t app-cloudformation.yml
         -ot ./output-templates/app-cloudformation.yml
         -sb $PIPELINE_BUCKET
-        -sp $APPLICATION_NAME/package-ci
+        -sp $APPLICATION_NAME/package-ci/
 
 artifacts:
   files: 
