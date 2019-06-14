@@ -22,7 +22,7 @@ phases:
         -pl ./src/Flagscript.CiCdTest/
         -c Release 
         -f netcoreapp2.1
-        -t ./app-cloudformation.yml
+        -t app-cloudformation.yml
         -ot ./output-templates/app-cloudformation.yml
         -sb $PIPELINE_BUCKET
         -sp $APPLICATION_NAME/package-ci
