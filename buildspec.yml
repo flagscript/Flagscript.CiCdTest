@@ -19,7 +19,7 @@ phases:
     commands:
       - >
         dotnet -d lambda package-ci 
-        -pl ./src/Flagscript.CiCdTest/Flagscript.CiCdTest.csproj 
+        -pl ./src/Flagscript.CiCdTest/
         -c Release 
         -f netcoreapp2.1
         -t ./app-cloudformation.yml
