@@ -1,3 +1,5 @@
+using System;
+
 using Amazon.Lambda.Core;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
@@ -8,6 +10,11 @@ namespace Flagscript.CiCdTest
     public class TestFunction
     {
 
+        public TestFunction()
+        {
+
+        }
+
 
         /// <summary>
         /// A Lambda function to respond to HTTP Get methods from API Gateway
@@ -16,9 +23,12 @@ namespace Flagscript.CiCdTest
         /// <returns>The list of blogs</returns>
         public string SayHello(ILambdaContext context)
         {
-			context.Logger.LogLine("SayHello Request\n");
 
-            return "Hello AWS Serverless";
+			string env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        
+			context.Logger.LogLine($"SayHello Request - {env}\n");
+
+			return $"Hello AWS Serverless - {env}";
         }
     }
 }
