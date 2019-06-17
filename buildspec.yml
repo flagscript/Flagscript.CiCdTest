@@ -9,7 +9,7 @@ phases:
       - export PATH="$PATH:/root/.dotnet/tools"
       # Setup dotnet cli aws extensions
       - dotnet tool install -g Amazon.Lambda.Tools
-  pre-build:
+  pre_build:
     commands: 
       - mkdir ./output-templates
   build:
