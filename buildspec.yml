@@ -9,12 +9,9 @@ phases:
       - export PATH="$PATH:/root/.dotnet/tools"
       # Setup dotnet cli aws extensions
       - dotnet tool install -g Amazon.Lambda.Tools
-    finally:
-      # List Environment Variables
-      # - printenv
-      # Print CodeBuild Vars
-      - echo $PIPELINE_BUCKET
-      - echo $APPLICATION_NAME
+  pre-build:
+    commands: 
+      - mkdir ./output-templates
   build:
     commands:
       - >
