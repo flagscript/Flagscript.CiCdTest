@@ -10,12 +10,11 @@ phases:
       # Setup dotnet cli aws extensions
       - dotnet tool install -g Amazon.Lambda.Tools
   pre_build:
-    commands: 
+    commands:
+      # Make Templates Dir
       - mkdir ./output-templates
   build:
     commands:
-      # Make Templates Dir
-      - mkdir output-templates
       # Package CI
       - >
         dotnet lambda package-ci 
