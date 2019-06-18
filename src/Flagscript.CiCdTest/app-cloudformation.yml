@@ -4,6 +4,15 @@ Description: Serverless MVC Website => flagscript.technology
 
 Parameters:
 
+  ApplicationName:
+    AllowedPattern: '[a-z-]+'
+    ConstraintDescription: must only contain lowercase letters and hyphens
+    Default: flagscript-tech-website
+    Description: Name of the dotnet application to deploy
+    Type: String
+    MinLength: 5
+    MaxLength: 30
+
   AspNetCoreEnvironment:
     Type: String
     AllowedValues:
@@ -24,6 +33,7 @@ Resources:
   FlagscriptLambda:
     Type: AWS::Serverless::Function
     Properties:
+      FunctionName: !Sub {ApplicationName}-lambda-SayHello
       Handler: Flagscript.CiCdTest::Flagscript.CiCdTest.TestFunction::SayHello
       CodeUri: 
       Policies: 
