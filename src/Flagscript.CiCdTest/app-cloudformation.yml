@@ -33,11 +33,27 @@ Resources:
   FlagscriptLambda:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub ${ApplicationName}-lambda-SayHello
-      Handler: Flagscript.CiCdTest::Flagscript.CiCdTest.TestFunction::SayHello
+      FunctionName: !Sub ${ApplicationName}-lambda-mvc
+      Handler: Flagscript.CiCdTest::Flagscript.CiCdTest.LambdaEntryPoint::FunctionHandlerAsync
       CodeUri: 
       Policies: 
         - AWSLambdaFullAccess
       Environment: 
         Variables:
           ASPNETCORE_ENVIRONMENT: !Ref AspNetCoreEnvironment
+      Events:
+        ProxyResource:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+        RootResource:
+          Type: Api
+          Properties:
+            Path: /
+            Method: ANY
+
+Outputs:
+    MvcUrl:
+      Description: MVC Website endpoint URL for Prod environment
+      Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/'
