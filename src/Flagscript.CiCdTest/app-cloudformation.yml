@@ -22,6 +22,12 @@ Parameters:
     Default: Development
     Description: Value to use for bootstraping ASPNETCORE_ENVIRONMENT environment variable.
 
+  WebsiteDomainName:
+    Type: String
+
+  CertificateArn:
+    Type: String
+
 Globals:
   Function:
     Runtime: dotnetcore2.1
@@ -52,6 +58,33 @@ Resources:
           Properties:
             Path: /
             Method: ANY
+
+  WebsiteDomainName:
+    Type: AWS::ApiGateway::DomainName
+    Properties:
+      RegionalCertificateArn: !Ref CertificateArn
+      DomainName: !Ref WebsiteDomainName
+      EndpointConfiguration:
+        Types:
+          - REGIONAL
+
+  WebsiteDomainBasePathMapping:
+    Type: AWS::ApiGateway::BasePathMapping
+    Properties:
+      DomainName: !Ref WebsiteDomainName
+      RestApiId: !Ref ServerlessRestApi
+      Stage: Prod
+
+  WebsiteDomain:
+    Type: AWS::Route53::RecordSetGroup
+    Properties:
+      HostedZoneId: ZKMUOIZE0RJK4
+      RecordSets:
+      - Name: !Ref WebsiteDomainName
+        Type: A
+        AliasTarget:
+          DNSName: !GetAtt WebsiteDomainName.RegionalDomainName
+          HostedZoneId: !GetAtt WebsiteDomainName.RegionalHostedZoneId    
 
 Outputs:
     MvcUrl:
