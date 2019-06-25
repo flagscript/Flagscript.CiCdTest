@@ -22,7 +22,7 @@ Parameters:
     Default: Development
     Description: Value to use for bootstraping ASPNETCORE_ENVIRONMENT environment variable.
 
-  WebsiteDomainName:
+  StageWebsiteDomainName:
     Type: String
 
   CertificateArn:
@@ -63,7 +63,7 @@ Resources:
     Type: AWS::ApiGateway::DomainName
     Properties:
       RegionalCertificateArn: !Ref CertificateArn
-      DomainName: !Ref WebsiteDomainName
+      DomainName: !Ref StageWebsiteDomainName
       EndpointConfiguration:
         Types:
           - REGIONAL
@@ -80,7 +80,7 @@ Resources:
     Properties:
       HostedZoneId: ZKMUOIZE0RJK4
       RecordSets:
-      - Name: !Ref WebsiteDomainName
+      - Name: !Ref StageWebsiteDomainName
         Type: A
         AliasTarget:
           DNSName: !GetAtt WebsiteDomainName.RegionalDomainName
