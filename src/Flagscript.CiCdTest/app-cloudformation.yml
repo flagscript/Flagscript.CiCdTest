@@ -78,7 +78,7 @@ Resources:
   WebsiteDomain:
     Type: AWS::Route53::RecordSetGroup
     Properties:
-      HostedZoneId: ZKMUOIZE0RJK4
+      HostedZoneName: flagscript.technology
       RecordSets:
       - Name: !Ref StageWebsiteDomainName
         Type: A
