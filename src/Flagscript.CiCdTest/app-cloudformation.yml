@@ -22,6 +22,9 @@ Parameters:
     Default: Development
     Description: Value to use for bootstraping ASPNETCORE_ENVIRONMENT environment variable.
 
+  HostedZoneDomainName:
+    Type: String
+
   StageWebsiteDomainName:
     Type: String
 
@@ -73,30 +76,19 @@ Resources:
     Properties:
       DomainName: !Ref WebsiteDomainName
       RestApiId: !Ref ServerlessRestApi
-      Stage: Prod
-
-  #WebsiteDomain:
-  #  Type: AWS::Route53::RecordSetGroup
-  #  Properties:
-  #    HostedZoneName: flagscript.technology.
-  #    RecordSets:
-  #    - Name: !Ref StageWebsiteDomainName
-  #      Type: A
-  #      AliasTarget:
-  #        DNSName: !GetAtt WebsiteDomainName.RegionalDomainName
-  #        HostedZoneId: !GetAtt WebsiteDomainName.RegionalHostedZoneId    
+      Stage: Prod  
 
 Outputs:
-
-    MvcApiGatewayUrl:
-      Description: MVC Website endpoint URL for Prod environment
-      Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/'
 
     RegionalDomainName:
       Description: The domain name associated with the regional endpoint for this custom domain name.
       Value: !GetAtt WebsiteDomainName.RegionalDomainName
 
-    RegionalHostedZoneId:
-      Description:
-      Value: !GetAtt WebsiteDomainName.RegionalHostedZoneId
+    HostedZoneLookupDomainName:
+      Description: Hosted Zone Domain Lookup Name
+      Value: !Ref HostedZoneDomainName
+
+    WebApiDnsDomain:
+      Description: domain for the web api
+      Value: !Ref StageWebsiteDomainName
     

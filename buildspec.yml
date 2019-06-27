@@ -25,6 +25,8 @@ phases:
         -ot ./output-templates/app-cloudformation.yml
         -sb $PIPELINE_BUCKET
         -sp $APPLICATION_NAME/package-ci/
+      # Copy DNS Cloudformation
+      - cp ./src/Flagscript.CiCdTest/dns-cloudformation.yml ./output-templates/dns-cloudformation.yml
 
 artifacts:
   files: 
